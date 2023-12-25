@@ -9,7 +9,7 @@ import './theme-config.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Helpdesk Issue Tracker',
+  title: 'Helpdesk Tracker',
   description: 'A simple issue tracker for your helpdesk',
 }
 
