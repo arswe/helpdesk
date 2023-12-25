@@ -9,10 +9,7 @@ interface Props {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
-  const issue = await prisma.issue.findUnique({
-    where: { id: parseInt(params.id) },
-  })
-
+  const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
   if (!issue) notFound()
 
   return (
@@ -26,5 +23,7 @@ const IssueDetailPage = async ({ params }: Props) => {
     </Grid>
   )
 }
+
+
 
 export default IssueDetailPage
