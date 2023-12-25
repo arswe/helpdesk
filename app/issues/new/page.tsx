@@ -1,6 +1,7 @@
 'use client'
 
 import ErrorMessage from '@/app/components/ErrorMessage'
+import Spinner from '@/app/components/Spinner'
 import { createIssueSchema } from '@/app/validationSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Callout, TextField } from '@radix-ui/themes'
@@ -26,6 +27,7 @@ const NewIssuePage = () => {
   })
 
   const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
     <div>
@@ -38,9 +40,11 @@ const NewIssuePage = () => {
         className='max-w-xl space-y-3'
         onSubmit={handleSubmit(async (data) => {
           try {
+            setIsSubmitting(true)
             await axios.post('/api/issues', data)
             router.push('/issues')
           } catch (error) {
+            setIsSubmitting(false)
             setError('Something went wrong')
           }
         })}>
@@ -48,7 +52,7 @@ const NewIssuePage = () => {
           <TextField.Input placeholder='Title' {...register('title')} />
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        
+
         <Controller
           name='description'
           control={control}
@@ -56,7 +60,10 @@ const NewIssuePage = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit New Issue </Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue
+          {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   )
