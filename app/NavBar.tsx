@@ -1,6 +1,12 @@
+'use client'
+
+import claassnames from 'classnames'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const NavBar = () => {
+  const currentPath = usePathname()
+
   const links = [
     { href: '/', label: 'Dashboard' },
     { href: '/issues', label: 'Issues' },
@@ -14,7 +20,14 @@ const NavBar = () => {
 
       <ul className='flex space-x-6'>
         {links.map(({ href, label }) => (
-          <Link key={href} href={href} className='text-zinc-500 hover:text-zinc-900 transition-colors'>
+          <Link
+            key={href}
+            href={href}
+            className={claassnames({
+              'text-zinc-950': href === currentPath,
+              'text-zinc-500': href !== currentPath,
+              'hover:text-zinc-800 transition-colors': true,
+            })}>
             {label}
           </Link>
         ))}
