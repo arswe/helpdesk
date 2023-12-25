@@ -13,7 +13,7 @@ const NavBar = () => {
   ]
 
   return (
-    <nav className='flex space-x-6 border-b-3 mb-5 px-5 h-14 items-center'>
+    <nav className='flex space-x-6 border-b-2  mb-5 px-5 h-14 items-center'>
       <Link href='/' className='font-bold text-lg italic '>
         <span className='text-red-500 hover:text-red-600'>HELP</span> DESK
       </Link>
