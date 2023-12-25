@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter, Rajdhani } from 'next/font/google'
 import NavBar from './NavBar'
 import './globals.css'
+import './theme-config.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,15 +16,17 @@ export const metadata: Metadata = {
 const rajdhani = Rajdhani({
   subsets: ['latin'],
   weight: ['600', '700'],
+  variable: '--font-rajdhani',
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className={rajdhani.className}>
-        <Theme>
+      <body className={rajdhani.variable}>
+        <Theme appearance='dark' accentColor='sky' radius='small'>
           <NavBar />
           <main className='p-5'>{children}</main>
+          {/* <ThemePanel /> */}
         </Theme>
       </body>
     </html>

@@ -4,6 +4,8 @@ import claassnames from 'classnames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+
+
 const NavBar = () => {
   const currentPath = usePathname()
 
@@ -24,9 +26,9 @@ const NavBar = () => {
             key={href}
             href={href}
             className={claassnames({
-              'text-zinc-950': href === currentPath,
-              'text-zinc-500': href !== currentPath,
-              'hover:text-zinc-800 transition-colors': true,
+              'text-emerald-300': href === currentPath,
+              'text-emerald-500': href !== currentPath,
+              'hover:text-emerald-800 transition-colors': true,
             })}>
             {label}
           </Link>
