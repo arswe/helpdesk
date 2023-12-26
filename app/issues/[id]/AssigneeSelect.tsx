@@ -28,7 +28,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         defaultValue={issue.assignedToUserId || 'Unassigned'}
         onValueChange={(userId) => {
           axios
-            .patch('/api/issues/' + issue.id, { assignedToUserId: userId === 'Unassigned' ? null : userId })
+            .patch('/xapi/issues/' + issue.id, { assignedToUserId: userId === 'Unassigned' ? null : userId })
             .catch((error) => {
               toast.error('Changes could not be saved.')
             })
@@ -50,7 +50,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         </Select.Content>
       </Select.Root>
 
-      <Toaster />
+      <Toaster position='top-right' reverseOrder={false} />
     </>
   )
 }
