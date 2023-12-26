@@ -7,8 +7,8 @@ import NavLinks from './components/NavLinks'
 
 const NavBar = () => {
   return (
-    <nav className='border-b-2  mb-5 px-5 py-3'>
-      <Container>
+    <nav className='border-b-2  mb-5 px-5 py-5'>
+      <Container size='3'>
         <Flex justify='between'>
           <Flex align='center' gap='5'>
             <Logo />
