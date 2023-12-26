@@ -25,7 +25,6 @@ const AssigneeSelect = () => {
             <Select.Item key={user.id} value={user.id}>
               {user.name}
             </Select.Item>
-            
           ))}
         </Select.Group>
         <Select.Separator />
