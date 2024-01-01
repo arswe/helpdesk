@@ -23,8 +23,8 @@ model Issue {
 
 enum Status {
   OPEN
-  CLOSED
   IN_PROGRESS
+  CLOSED
 }
 
 model Account {
