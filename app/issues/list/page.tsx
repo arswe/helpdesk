@@ -7,7 +7,7 @@ import NextLink from 'next/link'
 import IssueActions from './IssueActions'
 
 interface Props {
-  searchParams: { status: Status; orderBy: keyof Issue }
+  searchParams: { status: Status; orderBy: keyof Issue; page: string }
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -20,16 +20,24 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const statuses = Object.values(Status)
 
   const status = statuses.includes(searchParams.status) ? searchParams.status : undefined
-  const orderBy = columns
-  .map((column) => column.value)
-  .includes(searchParams.orderBy)
+
+  const where = { status }
+
+  const orderBy = columns.map((column) => column.value).includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: 'asc' }
     : undefined
 
+  const page = parseInt(searchParams.page) || 1
+  const pageSize = 10
+
   const issues = await prisma.issue.findMany({
-    where: { status },
+    where,
     orderBy,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   })
+
+  const issueCount = await prisma.issue.count({ where })
 
   return (
     <>
@@ -68,7 +76,6 @@ const IssuesPage = async ({ searchParams }: Props) => {
   )
 }
 
-// Opt out of caching for all data requests in the route segment
 export const dynamic = 'force-dynamic'
 
 export default IssuesPage
