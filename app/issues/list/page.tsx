@@ -1,4 +1,5 @@
 import { IssueStatusBadge, Link } from '@/app/components'
+import Pagination from '@/app/components/Pagination'
 import prisma from '@/prisma/client'
 import { Issue, Status } from '@prisma/client'
 import { ArrowUpIcon } from '@radix-ui/react-icons'
@@ -72,6 +73,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagination pageSize={pageSize} currentPage={page} itemCount={issueCount} />
     </>
   )
 }
@@ -79,3 +81,4 @@ const IssuesPage = async ({ searchParams }: Props) => {
 export const dynamic = 'force-dynamic'
 
 export default IssuesPage
+ 
