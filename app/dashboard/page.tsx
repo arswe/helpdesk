@@ -1,10 +1,22 @@
-import Pagination from '../components/Pagination'
+import prisma from '@/prisma/client'
+import { Flex, Grid } from '@radix-ui/themes'
+import IssueChart from './IssueChart'
+import IssueSummary from './IssueSummary'
+import LatestIssues from './LatestIssues'
 
-const Dashboard = ({ searchParams }: { searchParams: { page: string } }) => {
+const Dashboard = async () => {
+  const open = await prisma.issue.count({ where: { status: 'OPEN' } })
+  const inProgress = await prisma.issue.count({ where: { status: 'IN_PROGRESS' } })
+  const close = await prisma.issue.count({ where: { status: 'CLOSED' } })
+
   return (
-    <div>
-      <Pagination itemCount={100} pageSize={10} currentPage={parseInt(searchParams.page)} />
-    </div>
+    <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
+      <Flex direction={'column'} gap={'5'}>
+        <IssueSummary open={open} inProgress={inProgress} close={close} />
+        <IssueChart open={open} inProgress={inProgress} close={close} />
+      </Flex>
+      <LatestIssues />
+    </Grid>
   )
 }
 
