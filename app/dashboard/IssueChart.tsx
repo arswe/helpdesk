@@ -26,7 +26,6 @@ const IssueChart = ({ open, inProgress, close }: Props) => {
           <Tooltip />
           <Legend />
           <Bar dataKey='value' barSize={60} style={{ fill: 'var(--accent-9)' }} />
-          <Bar dataKey='value' barSize={60} style={{ fill: 'var(--accent-7)' }} />
         </BarChart>
       </ResponsiveContainer>
     </Card>
